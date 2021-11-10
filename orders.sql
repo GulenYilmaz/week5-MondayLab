@@ -1,25 +1,29 @@
--- order_id, person_id, product_name, product_price, quantity
-
+--1
 CREATE TABLE orders (
-order_id SERIAL PRIMARY KEY 
-person_id INTEGER, 
-product_name VARCHAR(30), 
-product_price FLOAT, 
-quantity FLOAT);
+    order_id SERIAL PRIMARY KEY,
+    person_id INTEGER,
+    product_name VARCHAR(40),
+    product_price FLOAT,
+    quantity INTEGER
+);
 
--- Add 5 orders to the orders table.
--- Make orders for at least two different people.
--- person_id should be different for different people.
+--2
+INSERT INTO orders (person_id, product_name, product_price, quantity)
+VALUES (10, 'shirt', 8, 3),
+(15, 'jacket', 25, 1),
+(10, 'coat', 45, 1),
+(16, 'scarf', 12, 2),
+(22, 'boots', 60, 2);
 
-INSERT INTO records(person_id,product_name, product_price, quantity)
-VALUES (17,'shirt', 70,500),
-       (35, 'pants', 100,420);
-
--- 3 Select all the records from the orders table.
+--3
 SELECT * FROM orders;
--- 4 Calculate the total number of products ordered.
-SELECT SUM (qualtity) FROM orders;
--- 5 Calculate the total order price.
-SELECT SUM (qualtity * product_price)FROM orders;
--- 6 Calculate the total order price by a single person_id.
-SELECT SUM (quantity * product_price ) FROM orders WHERE person_id =17;
+
+--4
+SELECT SUM(quantity) FROM orders;
+
+--5
+SELECT SUM(product_price*quantity) FROM orders;
+
+--6
+SELECT SUM(product_price*quantity) FROM orders
+WHERE person_id = 10;
